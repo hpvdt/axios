@@ -40,7 +40,7 @@ volatile unsigned long lastRising, lastFalling;
 const byte CO2Screen = 0;
 const byte O2Screen[] = {3, 2, 1};
 
-//#define TESTMODE // Uncomment for just showing random/test data on displays
+#define TESTMODE // Uncomment for just showing random/test data on displays
 
 void setup() {
 
@@ -58,9 +58,19 @@ void loop() {
 
 #ifdef TESTMODE
   // Show random numbers on the middle two displays
-  displayInt(random(10000), O2Screen[random(2) + 1]);
-  displayFloat(millis() / 1000.0, O2Screen[0], 1);  // Time running on top display
+  //displayInt(random(10000), O2Screen[random(2) + 1]);
+  //displayFloat(millis() / 1000.0, O2Screen[0], 1);  // Time running on top display
 
+  // Work through readings of a particular sensor (useful for initial calibrations)
+  const byte oxygenSensorOfInterest = 2; 
+  
+  noInterrupts();
+  delayMicroseconds(10); // A bit for noise to dissappear
+  displayInt(analogRead(oxygenSensor[oxygenSensorOfInterest]), O2Screen[0]);
+  displayInt(analogRead(oxygenCalibration[oxygenSensorOfInterest]), O2Screen[1]);
+  displayFloat(oxygenRead(2), O2Screen[oxygenSensorOfInterest], 2);
+  interrupts();
+    
   displayInt(digitalRead(CO2Sensor), CO2Screen);  // Show state of sensor
 #else
 
@@ -77,7 +87,7 @@ void loop() {
   else displayInt(CO2Level, CO2Screen);               // Sensor should be operational
 #endif
 
-  delay(25);
+  delay(100);
 }
 
 void CO2Interrupt () {
@@ -108,14 +118,23 @@ void CO2Interrupt () {
 
 float oxygenRead(byte sensor) {
   // Oxygen value calculations
+
+  
   // Get analog values
-  float OR = analogRead(oxygenSensor[sensor]);          // Oxygen sensor reading
-  float cal = analogRead(oxygenCalibration[sensor]);    // This is the calibration value.
+  // Need to disable interrupts so display code doesn't cause noise when reading
+  noInterrupts();
+  delayMicroseconds(10); // A bit for noise to dissappear
+
+  // Using int since it is faster
+  int OR = analogRead(oxygenSensor[sensor]);          // Oxygen sensor reading
+  int cal = analogRead(oxygenCalibration[sensor]);    // This is the calibration value.
+
+  interrupts();
 
   // Math
-  float b = cal / 21.0;
-  float m = (1010.0 - cal) / 79.0; // This is the gradient (slope) of the function.
-  float oxy = (OR - b) / m;     // This is the oxygen value.
+  float b = float(cal) / 21.0;
+  float m = (1010.0 - float(cal)) / 79.0; // This is the gradient (slope) of the function.
+  float oxy = (float(OR) - b) / m;     // This is the oxygen value.
 
   return (oxy);
 }
