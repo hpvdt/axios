@@ -31,7 +31,7 @@ const byte oxygenCalibration[] = {A4, A3, A2};
 
 // CO2 related pin and variables
 const byte CO2Sensor = 2; // CO2 sensor pin
-const int CO2Span = 2000;                     // Span in ppm of CO2 of sensor
+const int CO2Span = 5000;                     // Span in ppm of CO2 of sensor
 const long CO2WarmUp = 180000;                // CO2 sensor warmup time in ms (datasheet says 3 minutes)
 volatile unsigned long CO2Level = 400;        // 400ish is ambient so good default
 volatile unsigned long lastRising, lastFalling;
