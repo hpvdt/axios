@@ -71,7 +71,7 @@ The display system was identical across the boards. Given the amount of pins tha
 
 Although the two boards would operate seperately, they were designed to be roughly arranged as shown below. These displays were meant to be bright enough to pass through the back of the partial mirror used to provide the captian a view.
 
-![Planned Axios layout](https://github.com/hpvdt/axios/blob/master/Hardware/Axios%20dash.png)
+![Planned Axios layout](https://github.com/hpvdt/axios/blob/main/Hardware/Axios%20dash.png)
 
 # Software Used
 
