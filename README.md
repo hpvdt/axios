@@ -61,9 +61,9 @@ Reading the depth was done using a pressure sensor that was connected to a port 
 
 ### Pedal Power Data
 
-This was planned to use a Raspberry Pi Zero with an ANT dongle to read available ANT data from the pedals in Axios and then broadcast it over UART to the microcontroller to display it for the rider.
+This was planned to use a Raspberry Pi Zero with an ANT dongle to read available ANT data from the commercial power pedals in Axios and then broadcast it over UART to the microcontroller to display it for the rider.
 
-This never really reached development, although it would likely be heavily based off the code prepared for [TITAN (2019)](https://github.com/hpvdt/titan_2019).
+This never really reached development, although it would likely be heavily based off the working ANT code prepared for [TITAN (2019)](https://github.com/hpvdt/titan_2019).
 
 ## Displays
 
