@@ -4,7 +4,7 @@
 
 # Axios
 
-Our attempt at a human powered submarine, titled Axios. Within it there were two electronics systems to be implemented: rebreather monitoring and navigation. These were meant to be operate entirely independantly of one another, being powered off seperate batteries.
+Our attempt at a human powered submarine, titled Axios. Within it there were two electronics systems to be implemented: rebreather monitoring and navigation. These were meant to be operate entirely independently of one another, being powered off separate batteries.
 
 In this repository resides the code and hardware design files prepared for the initial versions of these systems from before the team decided to cancel the project.
 
@@ -12,7 +12,7 @@ Both systems were based around ATmega328P microcontrollers due to the team's fam
 
 ## Rebreather System
 
-This was meant to supervise the different gas sensors around the submarine hull to inform the pilot about the atmospheric state within Axios. It collected data from three oxygen sensors and one carbon dioxide (CO2) sensor, it then displayed the value of each on seperate seven-segment displays.
+This was meant to supervise the different gas sensors around the submarine hull to inform the pilot about the atmospheric state within Axios. It collected data from three oxygen sensors and one carbon dioxide (CO2) sensor, it then displayed the value of each on separate seven-segment displays.
 
 Of the two systems prepared for Axios, this was by far the more mature one. It was essentially ready for final deployment.
 
@@ -34,13 +34,13 @@ The solution for this was a set of of high precision amplifiers made from operat
 
 ## Navigation
 
-Axios was designed to be controlled by three servo-actuated control fins. These needed a microcontroller to recieve input from the captian (?) and actuate them accordingly. In addition to steering the submarine, it was planned for the captian of Axios to be provided orientation data about the submarine (roll, pitch, yaw), depth information, and power from their pedals. 
+Axios was designed to be controlled by three servo-actuated control fins. These needed a microcontroller to receive input from the captain (?) and actuate them accordingly. In addition to steering the submarine, it was planned for the captain of Axios to be provided orientation data about the submarine (roll, pitch, yaw), depth information, and power from their pedals. 
 
 This board needs significant revision before it is worthy of installation into any submarine.
 
 ### Steering
 
-Steering was to be done using a modified game controller (so we had wires directly to the potentiometers within it) which was read as an analog signal and then following some linear algebra, servo angles would be determined and set. INtentionally a short and simple loop.
+Steering was to be done using a modified game controller (so we had wires directly to the potentiometers within it) which was read as an analog signal and then following some linear algebra, servo angles would be determined and set. Intentionally a short and simple loop.
 
 There was discussion of a feature to have the submarine maintain depth without user input, but we never reached this stage.
 
@@ -48,7 +48,7 @@ There was discussion of a feature to have the submarine maintain depth without u
 
 Orientation data was meant to be provided by the use of a 9-axis IMU attached to the board. This approach quickly revealed a few key issues:
 
-- The boards were going to move frequently within Axios, and the IMU would need to be recalibrated for each new position. This could be remedied by off-boarding the IMU to a set location in Axios.
+- The boards were going to move frequently within Axios, and the IMU would need to be calibrated for each new position. This could be remedied by off-boarding the IMU to a set location in Axios.
 - The IMU only provided accelerations and magnetic field, we would need to code or find a library to perform the sensor fusion on the ATmega.
    - This would likely lead to significant usage of processor time
    - Our solution may not be able to replicate a more polished sensor even after significant work
@@ -69,9 +69,9 @@ This never really reached development, although it would likely be heavily based
 
 The display system was identical across the boards. Given the amount of pins that needed to be controlled for all the displays a shift register was used for each display to control the segments as the digits were multiplexed by the microcontroller. This meant that all displays on a board could be controller by a handful of pins on the ATmega and a series of daisy-chained shift registers.
 
-Although the two boards would operate seperately, they were designed to be roughly arranged as shown below. These displays were meant to be bright enough to pass through the back of the partial mirror used to provide the captian a view.
+Although the two boards would operate separately, they were designed to be roughly arranged as shown below. These displays were meant to be bright enough to pass through the back of the partial mirror used to provide the captain a view.
 
-![Planned Axios layout](https://github.com/hpvdt/axios/blob/main/Hardware/Axios%20dash.png)
+![Planned Axios layout](/Hardware/Axios%20dash.png)
 
 # Software Used
 
